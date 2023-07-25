@@ -26,8 +26,11 @@
               <input type="password" name="pword" class="form-control" id="exampleInputPassword1">
             </div>
             <center>
-              <button type="submit" class="btn btn-primary">Submit</button>
+              <button type="submit" name="submitLogin" class="btn btn-primary">Submit</button>
             </center>
+            <br>
+            <hr>
+            <a href="index.php">OPEN FORM</a>
           </form>
         </div>
       </div>

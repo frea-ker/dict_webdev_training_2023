@@ -1,4 +1,5 @@
 <?php
+	include "../connection/connection.php";
 	$name = $_POST['name'];
 	$gender = $_POST['gender'];
 	$age = $_POST['age'];
@@ -27,6 +28,9 @@
 	echo "<br>";
 	echo $nationality;
 
-	//code
+	$sqlAddDeclaration = "INSERT INTO `healthdeclaration`(`name`, `gender`, `age`, `mobileNo`, `bodyTemp`, `covDiagnosed`, `covEncounter`, `covVacinated`, `nationality`) VALUES ('".$name."', '".$gender."', '".$age."', '".$mobileNo."', '".$bodyTemp."', '".$covDiagnosed."', '".$covEncounter."', '".$covVacinated."', '".$nationality."')";
+	if($runsqlAddDeclaration = mysqli_query($db_con, $sqlAddDeclaration)){
+		header("location: ../index.php");
+	}
 	
 ?>
