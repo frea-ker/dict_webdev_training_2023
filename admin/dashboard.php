@@ -1,4 +1,5 @@
 <?php
+  include "../connection/connection.php";
 	session_start();
 	if(!isset($_SESSION['idOfUser'])){
 		header("location:../login.php");
@@ -75,24 +76,41 @@
 			    </tr>
 			  </thead>
 			  <tbody>
+
+
+          <?php
+          // sql to retrieve all request by the current user
+          $sqlAllRequest = "SELECT * FROM `healthdeclaration` WHERE 1";
+          $runsqlAllRequest = mysqli_query($db_con, $sqlAllRequest);
+          $num = 1 ;
+           while ($getsqlAllRequest = mysqli_fetch_array($runsqlAllRequest)) {
+           
+          ?>
+
+
+
+
+
+
 <!--WHILE LOOP START-->
 			    <tr>
-			      <th>1</th>
-			      <td>text</td>
-			      <td>text</td>
-			      <td>text</td>
-			      <td>text</td>
-			      <td>text</td>
-			      <td>text</td>
-			      <td>text</td>
-			      <td>text</td>
-			      <td>text</td>
-			      <td>text</td>
+			      <th><?php echo $num; ?></th>
+			      <td><?php echo $getsqlAllRequest['email']; ?></td>
+            <td><?php echo $getsqlAllRequest['name']; ?></td>
+            <td><?php echo $getsqlAllRequest['gender']; ?></td>
+            <td><?php echo $getsqlAllRequest['age']; ?></td>
+            <td><?php echo $getsqlAllRequest['mobileNo']; ?></td>
+            <td><?php echo $getsqlAllRequest['bodyTemp']; ?></td>
+            <td><?php echo $getsqlAllRequest['covDiagnosed']; ?></td>
+            <td><?php echo $getsqlAllRequest['covEncounter']; ?></td>
+            <td><?php echo $getsqlAllRequest['covVacinated']; ?></td>
+            <td><?php echo $getsqlAllRequest['nationality']; ?></td>
 			      <th>
-			      	<button class="btn btn-primary" id="btn_edit" title="EDIT"><i class="bi bi-pencil-square"></i></button>
-			      	<button class="btn btn-danger" id="btn_delete" title="DELETE"><i class="bi bi-trash"></i></button>
+			      	<button class="btn btn-primary" id="<?php echo $getsqlAllRequest['id']; ?>" onclick="return update_click(this.id)" title="EDIT" data-bs-toggle="modal" data-bs-target="#editModal"><i class="bi bi-pencil-square"></i></button>
+			      	<button class="btn btn-danger" id="<?php echo $getsqlAllRequest['id']; ?>" onclick="return delete_click(this.id)" title="DELETE" data-bs-toggle="modal" data-bs-target="#deleteModal"><i class="bi bi-trash"></i></button>
 			      </th>
 			    </tr>
+          <?php $num = $num+1; }?>
 <!--WHILE LOOP END-->
 			  </tbody>
 			</table>
@@ -118,3 +136,65 @@
 	</script>
   </body>
 </html>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script type="text/javascript">
+  function update_click(clicked_id)
+  {
+      id_req = clicked_id
+
+      $.ajax({url: "ajax.action/update.ajax.action.php",
+      method: 'post',
+      data:{id:id_req},
+      success: function(result){
+        $(".update-ajax").html(result);
+      }
+    })
+  }
+</script>
+<script type="text/javascript">
+  function delete_click(clicked_id)
+  {
+      id_req = clicked_id
+
+      $.ajax({url: "ajax.action/delete.ajax.action.php",
+      method: 'post',
+      data:{id:id_req},
+      success: function(result){
+        $(".delete-ajax").html(result);
+      }
+    })
+  }
+</script>
+
+<!-- Modal -->
+<div class="modal fade" id="editModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-xl modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <div class="update-ajax">
+          <!-- content from ajax -->
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Modal -->
+<div class="modal fade" id="deleteModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-xl modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <div class="delete-ajax">
+          <!-- content from ajax -->
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

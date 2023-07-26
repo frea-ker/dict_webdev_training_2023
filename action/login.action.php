@@ -17,6 +17,8 @@
 			$getresult = mysqli_fetch_array($result);
 			$_SESSION['idOfUser'] = $getresult['id'];
 			header("location: ../admin/dashboard.php");
+		}else{
+			header("location: ../login.php");
 		}
 	}else{
 		echo "string";

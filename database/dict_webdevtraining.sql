@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jul 25, 2023 at 07:45 PM
+-- Generation Time: Jul 26, 2023 at 12:43 PM
 -- Server version: 10.4.28-MariaDB
 -- PHP Version: 8.2.4
 
@@ -54,6 +54,7 @@ CREATE TABLE `healthdeclaration` (
   `gender` varchar(50) NOT NULL,
   `age` varchar(5) NOT NULL,
   `mobileNo` varchar(15) NOT NULL,
+  `email` varchar(100) NOT NULL,
   `bodyTemp` varchar(10) NOT NULL,
   `covDiagnosed` varchar(20) NOT NULL,
   `covEncounter` varchar(20) NOT NULL,
@@ -65,8 +66,9 @@ CREATE TABLE `healthdeclaration` (
 -- Dumping data for table `healthdeclaration`
 --
 
-INSERT INTO `healthdeclaration` (`id`, `name`, `gender`, `age`, `mobileNo`, `bodyTemp`, `covDiagnosed`, `covEncounter`, `covVacinated`, `nationality`) VALUES
-(1, 'a', 'a', 'a', 'a', 'a', 'YES', 'YES', 'YES', 'a');
+INSERT INTO `healthdeclaration` (`id`, `name`, `gender`, `age`, `mobileNo`, `email`, `bodyTemp`, `covDiagnosed`, `covEncounter`, `covVacinated`, `nationality`) VALUES
+(1, 'Aldrin John', 'M', '23', '09123456789', 'a@a', '123', 'NO', 'NO', 'YES', 'filipino'),
+(2, 'b', 'M', '2', '02', 'b@b', '2.2', 'YES', 'YES', 'YES', 'b');
 
 --
 -- Indexes for dumped tables
@@ -98,7 +100,7 @@ ALTER TABLE `accounts`
 -- AUTO_INCREMENT for table `healthdeclaration`
 --
 ALTER TABLE `healthdeclaration`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
