@@ -67,7 +67,6 @@ CREATE TABLE `healthdeclaration` (
 
 INSERT INTO `healthdeclaration` (`id`, `name`, `gender`, `age`, `mobileNo`, `bodyTemp`, `covDiagnosed`, `covEncounter`, `covVacinated`, `nationality`) VALUES
 (1, 'a', 'a', 'a', 'a', 'a', 'YES', 'YES', 'YES', 'a');
-
 --
 -- Indexes for dumped tables
 --
