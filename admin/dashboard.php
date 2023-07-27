@@ -165,8 +165,8 @@
                     <td><?php echo $row['covVacinated']; ?></td>
                     <td><?php echo $row['nationality']; ?></td>
                         <th>
-                            <button class="btn btn-primary" id="btn_edit" title="EDIT"><i class="bi bi-pencil-square"></i></button>
-                            <button class="btn btn-danger" id="btn_delete" title="DELETE"><i class="bi bi-trash"></i></button>
+                            <button class="btn btn-primary" id="<?php echo $row['id']; ?>" onclick="update_click(this.id)" data-bs-toggle="modal" data-bs-target="#editModal" title="EDIT"><i class="bi bi-pencil-square"></i></button>
+                            <button class="btn btn-danger" id="<?php echo $row['id']; ?>" onclick="delete_click(this.id)" data-bs-toggle="modal" data-bs-target="#deleteModal" title="DELETE"><i class="bi bi-trash"></i></button>
                         </th>
                     </tr>
                  <?php } ?>
