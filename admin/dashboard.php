@@ -1,70 +1,8 @@
 <?php
-include "../connection/connection.php";
-session_start();
-if (!isset($_SESSION['idOfUser'])) {
-    header("location:../login.php");
-}
-
-function fetch_data($conn, $query)
-{
-    $result = mysqli_query($conn, $query);
-    $data = array();
-    while ($row = mysqli_fetch_assoc($result)) {
-        $data[] = $row;
-    }
-    return $data; 
-}
-
-// Fetch all data from the database
-$query = "SELECT * FROM healthdeclaration";
-$data = fetch_data($db_con, $query); 
-
-// Counters for the conditionals in the loop
-$covid_encounter_count = 0;
-$vaccinated_count = 0;
-$fever_count = 0;
-$adult_count = 0;
-$minor_count = 0;
-$foreigner_count = 0;
-
-// Loop through the data with conditionals
-foreach ($data as $row) {
-    // Check COVID-19 Encounter
-    if ($row['covEncounter'] == 'YES') {
-        $covid_encounter_count++;
-    }
-
-    // Check Vaccinated
-    if ($row['covVacinated'] == 'YES') {
-        $vaccinated_count++;
-    }
-
-    // Check Fever
-    if (floatval($row['bodyTemp']) >= 37.5) {
-        $fever_count++;
-    }
-
-    // Check Adult or Minor
-    $age = intval($row['age']);
-    if ($age >= 18) {
-        $adult_count++;
-    } else {
-        $minor_count++;
-    }
-
-    // Check Foreigner
-    $nationality = strtolower($row['nationality']);
-    if ($nationality != 'filipino') {
-        $foreigner_count++;
-    }
-}
-
-// Fetch all data from the database to display the data in the table
-$query = "SELECT * FROM healthdeclaration";
-$result = mysqli_query($db_con, $query);
-
-// Close the database connection
-mysqli_close($db_con);
+	session_start();
+	if(!isset($_SESSION['idOfUser'])){
+		header("location:../login.php");
+	}
 ?>
 
 
@@ -188,10 +126,71 @@ mysqli_close($db_con);
 
     <!--DATATABLE SCRIPT-->
     <script src="https://code.jquery.com/jquery-3.7.0.js"></script>
-    <script src="https://cdn.datatables.net/1.13.5/js/jquery.dataTables.min.js"></script>
-    <script type="text/javascript">
-        new DataTable('#example');
-    </script>
-</body>
-
+	<script src="https://cdn.datatables.net/1.13.5/js/jquery.dataTables.min.js"></script>
+	<script type="text/javascript">
+		new DataTable('#example');
+	</script>
+  </body>
 </html>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script type="text/javascript">
+  function update_click(clicked_id)
+  {
+      id_req = clicked_id
+
+      $.ajax({url: "ajax.action/update.ajax.action.php",
+      method: 'post',
+      data:{id:id_req},
+      success: function(result){
+        $(".update-ajax").html(result);
+      }
+    })
+  }
+</script>
+<script type="text/javascript">
+  function delete_click(clicked_id)
+  {
+      id_req = clicked_id
+
+      $.ajax({url: "ajax.action/delete.ajax.action.php",
+      method: 'post',
+      data:{id:id_req},
+      success: function(result){
+        $(".delete-ajax").html(result);
+      }
+    })
+  }
+</script>
+
+<!-- Modal -->
+<div class="modal fade" id="editModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-xl modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <div class="update-ajax">
+          <!-- content from ajax -->
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Modal -->
+<div class="modal fade" id="deleteModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-xl modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <div class="delete-ajax">
+          <!-- content from ajax -->
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

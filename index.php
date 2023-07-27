@@ -40,6 +40,10 @@
             <input type="text" name="mobileNo" required class="form-control border-primary" id="mobileNo" aria-describedby="emailHelp">
           </div>
           <div class="mb-3">
+            <label for="email" class="form-label">Email: </label>
+            <input type="email" name="email" required class="form-control border-primary" id="email" aria-describedby="emailHelp">
+          </div>
+          <div class="mb-3">
             <label for="bodyTemp" class="form-label">Body Temp: </label>
             <input type="text" name="bodyTemp" required class="form-control border-primary" id="bodyTemp" aria-describedby="emailHelp">
           </div>

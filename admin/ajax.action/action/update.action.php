@@ -1,5 +1,8 @@
 <?php
-	include "../connection/connection.php";
+	session_start();
+	include "../../../connection/connection.php";
+
+	$id = $_POST['id'];
 	$name = $_POST['name'];
 	$gender = $_POST['gender'];
 	$age = $_POST['age'];
@@ -31,9 +34,16 @@
 	echo "<br>";
 	echo $nationality;
 
-	$sqlAddDeclaration = "INSERT INTO `healthdeclaration`(`name`, `gender`, `age`, `mobileNo`, `email`, `bodyTemp`, `covDiagnosed`, `covEncounter`, `covVacinated`, `nationality`) VALUES ('".$name."', '".$gender."', '".$age."', '".$mobileNo."', '".$email."', '".$bodyTemp."', '".$covDiagnosed."', '".$covEncounter."', '".$covVacinated."', '".$nationality."')";
-	if($runsqlAddDeclaration = mysqli_query($db_con, $sqlAddDeclaration)){
-		header("location: ../index.php");
+	echo "<br><br><br>";
+
+	$sql = "UPDATE `healthdeclaration` SET `name`='".$name."',`gender`='".$gender."',`age`='".$age."',`mobileNo`='".$mobileNo."',`email`='".$email."',`bodyTemp`='".$bodyTemp."',`covDiagnosed`='".$covDiagnosed."',`covEncounter`='".$covEncounter."',`covVacinated`='".$covVacinated."',`nationality`='".$nationality."' WHERE id=".$id."";
+
+	echo $sql;
+
+	if(mysqli_query($db_con, $sql)){
+		echo "O.K";
+		header("location: ../../dashboard.php");
+	}else{
+		echo "UPDATE FAILED";
 	}
-	
 ?>
