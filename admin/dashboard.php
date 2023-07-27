@@ -1,8 +1,70 @@
 <?php
-	session_start();
-	if(!isset($_SESSION['idOfUser'])){
-		header("location:../login.php");
-	}
+   include "../connection/connection.php";
+   session_start();
+   if (!isset($_SESSION['idOfUser'])) {
+       header("location:../login.php");
+   }
+   
+   function fetch_data($conn, $query)
+   {
+       $result = mysqli_query($conn, $query);
+       $data = array();
+       while ($row = mysqli_fetch_assoc($result)) {
+           $data[] = $row;
+       }
+       return $data; 
+   }
+   
+   // Fetch all data from the database
+   $query = "SELECT * FROM healthdeclaration";
+   $data = fetch_data($db_con, $query); 
+   
+   // Counters for the conditionals in the loop
+   $covid_encounter_count = 0;
+   $vaccinated_count = 0;
+   $fever_count = 0;
+   $adult_count = 0;
+   $minor_count = 0;
+   $foreigner_count = 0;
+   
+   // Loop through the data with conditionals
+   foreach ($data as $row) {
+       // Check COVID-19 Encounter
+       if ($row['covEncounter'] == 'YES') {
+           $covid_encounter_count++;
+       }
+   
+       // Check Vaccinated
+       if ($row['covVacinated'] == 'YES') {
+           $vaccinated_count++;
+       }
+   
+       // Check Fever
+       if (floatval($row['bodyTemp']) >= 37.5) {
+           $fever_count++;
+       }
+   
+       // Check Adult or Minor
+       $age = intval($row['age']);
+       if ($age >= 18) {
+           $adult_count++;
+       } else {
+           $minor_count++;
+       }
+   
+       // Check Foreigner
+       $nationality = strtolower($row['nationality']);
+       if ($nationality != 'filipino') {
+           $foreigner_count++;
+       }
+   }
+   
+   // Fetch all data from the database to display the data in the table
+   $query = "SELECT * FROM healthdeclaration";
+   $result = mysqli_query($db_con, $query);
+   
+   // Close the database connection
+   mysqli_close($db_con);
 ?>
 
 
