@@ -19,7 +19,7 @@ function fetch_data($conn, $query)
 $query = "SELECT * FROM healthdeclaration";
 $data = fetch_data($db_con, $query); 
 
-//counters for the conditionals in the loop
+// Counters for the conditionals in the loop
 $covid_encounter_count = 0;
 $vaccinated_count = 0;
 $fever_count = 0;
@@ -30,12 +30,12 @@ $foreigner_count = 0;
 // Loop through the data with conditionals
 foreach ($data as $row) {
     // Check COVID-19 Encounter
-    if ($row['covEncounter'] == 'yes') {
+    if ($row['covEncounter'] == 'YES') {
         $covid_encounter_count++;
     }
 
     // Check Vaccinated
-    if ($row['covVacinated'] == 'yes') {
+    if ($row['covVacinated'] == 'YES') {
         $vaccinated_count++;
     }
 
@@ -59,13 +59,14 @@ foreach ($data as $row) {
     }
 }
 
-// Fetch all data from the database to display the data to the table
+// Fetch all data from the database to display the data in the table
 $query = "SELECT * FROM healthdeclaration";
 $result = mysqli_query($db_con, $query);
 
 // Close the database connection
 mysqli_close($db_con);
 ?>
+
 
 <!doctype html>
 <html lang="en">
@@ -125,7 +126,7 @@ mysqli_close($db_con);
                 </div>
                 <div class="col-sm-12 col-md-6 col-lg-4 border p-5 text-white" style="background-color: #9b9b9b">
                     <center>
-                        <span class="fs-1"><?= $foreigner_count ?></span><br>FOREINGER
+                        <span class="fs-1"><?= $foreigner_count ?></span><br>FOREIGNER
                     </center>
                 </div>
             </div>
@@ -136,11 +137,11 @@ mysqli_close($db_con);
                 <thead>
                     <tr>
                         <th>#</th>
-                        <!-- <th>E-mail</th> -->
                         <th>Name</th>
                         <th>Gender</th>
                         <th>Age</th>
                         <th>Mobile</th>
+                        <th>Email</th>
                         <th>Temp</th>
                         <th>Diagnosed</th>
                         <th>Encountered</th>
@@ -157,6 +158,7 @@ mysqli_close($db_con);
                     <td><?php echo $row['gender']; ?></td>
                     <td><?php echo $row['age']; ?></td>
                     <td><?php echo $row['mobileNo']; ?></td>
+                    <td><?php echo $row['email']; ?></td>
                     <td><?php echo $row['bodyTemp']; ?></td>
                     <td><?php echo $row['covDiagnosed']; ?></td>
                     <td><?php echo $row['covEncounter']; ?></td>

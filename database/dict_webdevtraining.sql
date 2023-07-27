@@ -54,6 +54,7 @@ CREATE TABLE `healthdeclaration` (
   `gender` varchar(50) NOT NULL,
   `age` varchar(5) NOT NULL,
   `mobileNo` varchar(15) NOT NULL,
+  `email` varchar(100) NOT NULL,
   `bodyTemp` varchar(10) NOT NULL,
   `covDiagnosed` varchar(20) NOT NULL,
   `covEncounter` varchar(20) NOT NULL,
@@ -65,8 +66,10 @@ CREATE TABLE `healthdeclaration` (
 -- Dumping data for table `healthdeclaration`
 --
 
-INSERT INTO `healthdeclaration` (`id`, `name`, `gender`, `age`, `mobileNo`, `bodyTemp`, `covDiagnosed`, `covEncounter`, `covVacinated`, `nationality`) VALUES
-(1, 'a', 'a', 'a', 'a', 'a', 'YES', 'YES', 'YES', 'a');
+INSERT INTO `healthdeclaration` (`id`, `name`, `gender`, `age`, `mobileNo`, `email`, `bodyTemp`, `covDiagnosed`, `covEncounter`, `covVacinated`, `nationality`) VALUES
+(1, 'Aldrin John', 'M', '23', '09123456789', 'a@a', '123', 'NO', 'NO', 'YES', 'filipino'),
+(2, 'b', 'M', '2', '02', 'b@b', '2.2', 'YES', 'YES', 'YES', 'b');
+
 --
 -- Indexes for dumped tables
 --
