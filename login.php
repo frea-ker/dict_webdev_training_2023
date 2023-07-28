@@ -17,17 +17,32 @@
           <p class="fs-3">LOGIN</p>
           <hr>
           <form method="POST" action="action/login.action.php">
-            <div class="mb-3">
-              <label for="exampleInputEmail1" class="form-label">Email address</label>
-              <input type="email" name="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+            <div class="row">
+              <div class="col m-1">
+                 <div class="mb-3">
+                  <label for="exampleInputEmail1" class="form-label">Email address</label>
+                  <input type="email" name="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+                </div>
+                <div class="mb-3">
+                  <label for="exampleInputPassword1" class="form-label">Password</label>
+                  <input type="password" name="pword" class="form-control" id="exampleInputPassword1">
+                </div>
+                <center>
+                  <button type="submit" name="submitLogin" class="btn btn-primary">Submit</button>
+                </center>
+              </div>
+              <div class="col border m-1">
+                umail: uname@a
+                <br>
+                password: password1
+              <hr>
+                umail: uname@b
+                <br>
+                password: password2
+              </div>
+              </div>
             </div>
-            <div class="mb-3">
-              <label for="exampleInputPassword1" class="form-label">Password</label>
-              <input type="password" name="pword" class="form-control" id="exampleInputPassword1">
-            </div>
-            <center>
-              <button type="submit" name="submitLogin" class="btn btn-primary">Submit</button>
-            </center>
+           
             <br>
             <hr>
             <a href="index.php">OPEN FORM</a>
